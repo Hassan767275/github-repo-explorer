@@ -12,8 +12,13 @@ app.get("/api", (req, res) => {
 })
 
 app.get("/search", async (req, res) => {
-    const repo = await fetch(`https://api.github.com/users/${'Hassan767275'}/repos`)
-    const repoJson = await repo.json()
+    const { username } = req.query
+    const response = await fetch(`https://api.github.com/users/${username}/repos`)
+    const repoJson = await response.json()
+
+    if (!response.ok) {
+        return res.status(404).json({error: "invalid username"})
+    }
     res.json(repoJson)
 
 })

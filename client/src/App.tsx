@@ -1,12 +1,27 @@
-import { useEffect } from 'react'
-import Search from './components/search'
+import Search from "./components/search";
+import { useState } from "react";
 
 function App() {
+  const [error, setError] = useState(false)
+
+  async function searchRepos(formData: any) {
+    const username = formData.get('username')
+    const data = await fetch(`http://localhost:8000/search?username=${username}`);
+    const dataJson = await data.json();
+
+    if (data.status === 404) {
+      console.log('invalid ahh data')
+      setError(true)
+    }
+
+    console.log(dataJson);
+  }
+
   return (
     <>
-      <Search/>
+      <Search searchRepos={searchRepos} error={error}/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
