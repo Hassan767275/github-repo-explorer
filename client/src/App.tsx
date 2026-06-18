@@ -1,4 +1,5 @@
 import Search from "./components/search";
+import RepoResults from "./components/RepoResults";
 import { useState } from "react";
 
 function App() {
@@ -17,9 +18,10 @@ function App() {
   }
 
   return (
-    <>
+    <div className=" flex flex-col items-center">
       <Search searchRepos={searchRepos} error={error}/>
-    </>
+      <RepoResults />
+    </div>
   );
 }
 
