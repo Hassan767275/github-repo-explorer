@@ -1,6 +1,7 @@
 import Search from "./components/search";
 import RepoResults from "./components/RepoResults";
 import { useState } from "react";
+import { getUserRepo } from "./services.ts/api";
 
 function App() {
   const [error, setError] = useState(false)
@@ -8,8 +9,7 @@ function App() {
   const [repoCount, setRepoCount] = useState(0)
 
   async function searchRepos(formData: FormData) {
-    const username = formData.get('username')
-    const data = await fetch(`http://localhost:8000/search?username=${username}`);
+    const data = await getUserRepo(formData)
     const dataJson = await data.json();
 
     if (data.status === 404) {
@@ -19,8 +19,8 @@ function App() {
       setShowRepo(true)
       setRepoCount(dataJson.length)
     }
-
     console.log(dataJson);
+    
   }
 
   return (
