@@ -19,7 +19,7 @@ app.get("/search", async (req, res) => {
     if (!response.ok) {
         return res.status(404).json({error: "invalid username"})
     }
-    res.json(repoJson)
+    res.status(200).json(repoJson)
 
 })
 
