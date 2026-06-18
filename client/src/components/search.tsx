@@ -1,4 +1,6 @@
-export default function Search({ searchRepos, error }: any) {
+import type { SearchProps } from "../type";
+
+export default function Search({ searchRepos, error }: SearchProps) {
   return (
     <form className="m-4 flex justify-center" action={searchRepos}>
       <input
