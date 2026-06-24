@@ -21,6 +21,7 @@ function App() {
       setError(true);
       setShowRepo(false);
     } else if (data.status === 200) {
+      setError(false)
       setShowRepo(true);
       setRepoCount(dataJson.length);
       setRepoInfo(dataJson);
