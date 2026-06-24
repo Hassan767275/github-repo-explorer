@@ -6,3 +6,11 @@ export type SearchProps = {
 export type RepoCount = {
     repoCount: number
 }
+
+export interface Repo {
+    name: string;
+    description: string;
+    language: string;
+    stargazers_count: number;
+    html_url: string;
+}
