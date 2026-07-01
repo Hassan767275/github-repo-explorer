@@ -2,8 +2,9 @@ import Search from "./components/search";
 import RepoResults from "./components/RepoResults";
 import { useState } from "react";
 import { getUserRepo } from "./services.ts/api";
-import { RepoCard } from "./components/RepoCard";
+import RepoCard  from "./components/RepoCard";
 import type { Repo } from "./type";
+import Header from "./components/Header";
 
 function App() {
   const [error, setError] = useState(false);
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <div className=" flex flex-col items-center">
+      <Header/>
       <Search searchRepos={searchRepos} error={error} />
       {showRepo && <RepoResults repoCount={repoCount} />}
       {showRepo && repoInfo.map(({id, name, description, language, stargazers_count, html_url}) => (

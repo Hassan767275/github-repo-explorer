@@ -9,7 +9,7 @@ export default function Search({ searchRepos, error }: SearchProps) {
         name='username'
         placeholder={error ? "Please enter a valid username" : "search a github repo"}
       ></input>
-      <button className="bg-[#238636] text-[#e6edf3] px-4 py-1 rounded-lg font-bold">
+      <button className="bg-[#2563EB] hover:bg-[#3B82F6] text-[#e6edf3] px-4 py-1 rounded-lg font-bold">
         Search
       </button>
     </form>

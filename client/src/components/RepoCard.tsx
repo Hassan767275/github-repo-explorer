@@ -1,6 +1,6 @@
 import type { repoCard } from "../type"
 
-export function RepoCard({name, description, language, stargazers_count, html_url}: repoCard) {
+export default function RepoCard({name, description, language, stargazers_count, html_url}: repoCard) {
     return (
         <div className="my-4 w-72 sm:w-105 md:w-135 lg:w-175 lg:flex lg:justify-between bg-[#151d29] border border-[#30363d] rounded-lg">
             <div className="text-left flex flex-col gap-2 my-2 px-4 lg:py-2">
