@@ -11,7 +11,6 @@ function App() {
   const [showRepo, setShowRepo] = useState(false);
   const [repoCount, setRepoCount] = useState(0);
   const [repoInfo, setRepoInfo] = useState<Repo[]>([]);
-  console.log(repoInfo);
 
   async function searchRepos(formData: FormData) {
     const username = formData.get("username") as string;

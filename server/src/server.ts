@@ -6,6 +6,7 @@ const PORT = 8000
 const app = express()
 
 app.use(cors())
+app.use(express.json())
 
 app.get("/api", (req, res) => {
     res.json("Hello from express")
@@ -20,7 +21,10 @@ app.get("/search", async (req, res) => {
         return res.status(404).json({error: "invalid username"})
     }
     res.status(200).json(repoJson)
+})
 
+app.post("/auth/register", (req, res) => {
+    console.log(req.body)
 })
 
 app.listen(PORT, () => {
