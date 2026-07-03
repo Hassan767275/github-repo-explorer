@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import { registerUser } from "./controllers/authConroller.js"
 
 const PORT = 8000
 
@@ -23,9 +24,7 @@ app.get("/search", async (req, res) => {
     res.status(200).json(repoJson)
 })
 
-app.post("/auth/register", (req, res) => {
-    console.log(req.body)
-})
+app.post("/auth/register", registerUser)
 
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)
