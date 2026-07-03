@@ -5,8 +5,8 @@ export async function getUserRepo(username: string) {
   return data;
 }
 
-export function sendUserInfo({ username, email, password }: UserInfo) {
-  fetch("http://localhost:8000/auth/register", {
+export async function sendUserInfo({ username, email, password }: UserInfo) {
+  const response = await fetch("http://localhost:8000/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,4 +17,6 @@ export function sendUserInfo({ username, email, password }: UserInfo) {
       password,
     }),
   });
+  
+  return response
 }

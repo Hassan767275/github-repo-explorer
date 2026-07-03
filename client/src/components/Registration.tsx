@@ -1,12 +1,21 @@
 import { sendUserInfo } from "../services.ts/api"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export default function Registration() {
-  function registerUser(formData: FormData) {
+  const navigate = useNavigate()
+
+  async function registerUser(formData: FormData) {
     const username = formData.get("username") as string
     const email = formData.get("email") as string
     const password = formData.get("password") as string
 
-    sendUserInfo({username, email, password})    
+    const response = await sendUserInfo({username, email, password})  
+    if (response.status === 200) {
+      toast.success("Registration successfull!")
+      navigate("/login")
+    }
+    
   }
 
   return (

@@ -5,16 +5,18 @@ import { createBrowserRouter, RouterProvider} from "react-router-dom"
 import PageNotFound from './components/PageNotFound.tsx'
 import Login from './components/Login.tsx'
 import Registration from './components/Registration.tsx'
+import { ToastContainer } from 'react-toastify'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/> },
-  { path: "*", element: <PageNotFound/> },
   { path: "/login", element: <Login/> },
-  { path: "/register", element: <Registration/> }
+  { path: "/register", element: <Registration/> },
+  { path: "*", element: <PageNotFound/> }
 ])
 
 createRoot(document.getElementById('root')!).render(
   <>
+  <ToastContainer />
     <RouterProvider router={router}/>
   </>,
 )

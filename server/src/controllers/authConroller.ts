@@ -19,11 +19,11 @@ export async function registerUser(req: Request, res: Response) {
 
     const hashed = await bcrypt.hash(password, 10)
 
-    const result = await pool.query(
+    await pool.query(
         `INSERT INTO UserTable
         (username, email, password)
         VALUES ($1, $2, $3)`,
         [username, email, hashed]
     )
-    console.log(result)
+    res.status(200).json({message: "Registration was succesful"})
 }
