@@ -1,22 +1,12 @@
+import { sendUserInfo } from "../services.ts/api"
 
 export default function Registration() {
   function registerUser(formData: FormData) {
-    const username = formData.get("username")
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const username = formData.get("username") as string
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
 
-    console.log(username, email, password)
-    fetch("http://localhost:8000/auth/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username,
-            email,
-            password
-        })
-    })
+    sendUserInfo({username, email, password})    
   }
 
   return (

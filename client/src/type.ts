@@ -1,13 +1,13 @@
-export type SearchProps = {
+export interface SearchProps {
     searchRepos: (formData: FormData) => Promise<void>,
     error: boolean
 }
 
-export type RepoCount = {
+export interface RepoCount {
     repoCount: number
 }
 
-export type repoCard = {
+export interface repoCard {
     name: string;
     description: string;
     language: string;
@@ -22,4 +22,10 @@ export interface Repo {
     language: string;
     stargazers_count: number;
     html_url: string;
+}
+
+export interface UserInfo {
+    username: string,
+    email: string,
+    password: string
 }
