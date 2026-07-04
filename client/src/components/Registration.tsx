@@ -14,8 +14,9 @@ export default function Registration() {
     if (response.status === 200) {
       toast.success("Registration successfull!")
       navigate("/login")
+    } else {
+      toast.error("Username or Email already exists")
     }
-    
   }
 
   return (
