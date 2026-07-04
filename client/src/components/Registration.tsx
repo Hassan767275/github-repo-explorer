@@ -1,6 +1,7 @@
 import { sendUserInfo } from "../services.ts/api"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { Link } from "react-router-dom"
 
 export default function Registration() {
   const navigate = useNavigate()
@@ -42,10 +43,11 @@ export default function Registration() {
           type="password"
           required
         ></input>
-        <div className="flex justify-center mt-5">
+        <div className="flex flex-col items-center mt-5">
           <button className="bg-[#0F172A] hover:bg-[#1E293B] rounded px-4 py-0.5">
             Register
           </button>
+          <p className="mt-2 font-bold">Already a user? <Link to="/login" className="text-[#22C55E]">Log in</Link></p>
         </div>
       </form>
     </div>
