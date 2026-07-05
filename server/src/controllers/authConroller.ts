@@ -65,5 +65,5 @@ export async function loginUser(req: Request, res: Response) {
         return res.status(401).json({ message: "Invalid credentials"})
     }
 
-    console.log(password)
+    res.status(200).json({message: "Login succesfull"})
 }
