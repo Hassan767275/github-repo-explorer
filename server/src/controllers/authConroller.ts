@@ -38,5 +38,32 @@ export async function registerUser(req: Request, res: Response) {
 }
 
 export async function loginUser(req: Request, res: Response) {
-    console.log(req.body)
+    const { usernameOrEmail, password } = req.body
+
+    if ( !usernameOrEmail || usernameOrEmail.trim() === "") {
+        return res.status(409).json({ message: "Username or Email is required to login"})
+    }
+
+    if ( !password || password.trim() === "") {
+        return res.status(409).json({ message: "Password is required to login"})
+    }
+    
+    const result = await pool.query(
+        `SELECT * FROM UserTable WHERE username=$1 OR email=$2`,
+        [usernameOrEmail, usernameOrEmail]
+    )
+
+    if ( result.rowCount === 0 ) {
+        return res.status(401).json({ message: "Invalid credentials"})
+    }
+
+    const usersPassword = result.rows[0].password
+
+    const passwordsMatch = await bcrypt.compare(password, usersPassword)
+
+    if ( !passwordsMatch ) {
+        return res.status(401).json({ message: "Invalid credentials"})
+    }
+
+    console.log(password)
 }

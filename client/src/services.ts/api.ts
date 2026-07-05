@@ -22,7 +22,7 @@ export async function sendUserInfo({ username, email, password }: UserInfo) {
 }
 
 export async function sendUserLoginInfo(usernameOrEmail: String, password: String) {
-  fetch("http://localhost:8000/auth/login", {
+  const response = await fetch("http://localhost:8000/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,4 +32,8 @@ export async function sendUserLoginInfo(usernameOrEmail: String, password: Strin
       password,
     }),
   });
+  
+  const responseJson = await response.json()
+
+  return responseJson
 }
