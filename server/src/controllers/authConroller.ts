@@ -36,3 +36,7 @@ export async function registerUser(req: Request, res: Response) {
     )
     res.status(200).json({message: "Registration was succesful"})
 }
+
+export async function loginUser(req: Request, res: Response) {
+    console.log(req.body)
+}
