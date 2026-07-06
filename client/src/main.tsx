@@ -7,12 +7,14 @@ import Login from './components/Login.tsx'
 import Registration from './components/Registration.tsx'
 import { ToastContainer } from 'react-toastify'
 import { AuthProvider } from './components/AuthProvider.tsx'
+import Saved from './components/Saved.tsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/> },
   { path: "/login", element: <Login/> },
   { path: "/register", element: <Registration/> },
-  { path: "*", element: <PageNotFound/> }
+  { path: "*", element: <PageNotFound/> },
+  { path: "/saved", element: <Saved />}
 ])
 
 

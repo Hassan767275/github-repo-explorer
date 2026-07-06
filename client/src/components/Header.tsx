@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { authContext } from "./AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const { isLoggedIn, setIsLoggedIn } = useContext(authContext);
@@ -30,9 +31,11 @@ export default function Header() {
         Github Repo Explorer
       </h1>
       <div className="flex gap-2 ml-auto">
-        <button className="bg-[#F59E0B] hover:bg-[#FBBF24] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25">
-          Saved
-        </button>
+        <Link to="/saved">
+          <button className="bg-[#F59E0B] hover:bg-[#FBBF24] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25">
+            Saved
+          </button>
+        </Link>
         <button
           className="bg-[#7C3AED] hover:bg-[#8B5CF6] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25"
           onClick={isLoggedIn ? signOut : login}

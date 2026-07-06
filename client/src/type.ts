@@ -36,3 +36,52 @@ export interface loginContext {
     isSaved: boolean,
     setIsSaved: (arg0: boolean) => void
 }
+
+export interface SearchProps {
+    searchRepos: (formData: FormData) => Promise<void>,
+    error: boolean
+}
+
+export interface RepoCount {
+    repoCount: number
+}
+
+export interface repoCard {
+    name: string;
+    description: string;
+    language: string;
+    stargazers_count: number;
+    html_url: string;
+}
+
+export interface Repo {
+    id: number;
+    name: string;
+    description: string;
+    language: string;
+    stargazers_count: number;
+    html_url: string;
+}
+
+export interface UserInfo {
+    username: string,
+    email: string,
+    password: string
+}
+
+export interface loginContext {
+    isLoggedIn: boolean,
+    setIsLoggedIn: (arg0: boolean) => void,
+    isSaved: boolean,
+    setIsSaved: (arg0: boolean) => void
+}
+
+export interface repos {
+    id: number,
+    user_id: number,
+    repo_name: string,
+    description: string | null,
+    language: string,
+    stargazers_count: number,
+    html_url: string,
+}
