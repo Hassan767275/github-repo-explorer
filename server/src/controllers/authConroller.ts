@@ -60,7 +60,6 @@ export async function loginUser(req: Request, res: Response) {
     }
 
     const usersPassword = result.rows[0].password
-    console.log(result.rows)
     const passwordsMatch = await bcrypt.compare(password, usersPassword)
 
     if ( !passwordsMatch ) {
@@ -68,11 +67,9 @@ export async function loginUser(req: Request, res: Response) {
     }
 
     const userId = result.rows[0].id
-    const username = result.rows[0].username
 
     const user = {
-        userId,
-        username
+        userId
     }
 
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15m'})

@@ -4,6 +4,8 @@ import authRouter from "./routes/auth.js"
 import { findRepo } from "./controllers/searchController.js"
 import { saveRouter } from "./routes/save.js"
 import type { Request, Response, NextFunction } from "express"
+import jwt from "jsonwebtoken"
+import "dotenv/config"
 
 const PORT = 8000
 
@@ -19,9 +21,22 @@ app.use("/user", authenticateUser, saveRouter)
 
 function authenticateUser(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers['authorization']
-    const token = authHeader?.split(" ")[1]
-    console.log(token)
-    next()
+    const token = authHeader && authHeader.split(" ")[1]
+
+    if (!token) {
+        return res.status(401).json({message: "Access denied. No token provided."})
+    }
+    
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!, (err, payload) => {
+        if (err) {
+            return res.status(403).json({message: "Invalid or expired token"})
+        }
+
+        if (typeof payload === 'object') {
+            req.userId = payload.userId
+            next()
+        }
+    })
 }
 
 

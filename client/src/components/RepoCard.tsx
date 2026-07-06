@@ -1,22 +1,28 @@
 import type { repoCard } from "../type"
+import { saveRepo } from "../services.ts/api"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export default function RepoCard({name, description, language, stargazers_count, html_url}: repoCard) {
     const accessToken = localStorage.getItem("accessToken")
-    function savePost() {
-        fetch("http://localhost:8000/user/favorites", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${accessToken}`
-            },
-            body: JSON.stringify({
-                name,
-                description,
-                language,
-                stargazers_count,
-                html_url
-            })
-        })
+    const navigate = useNavigate()
+
+    async function savePost() {
+        if (!accessToken) {
+            toast.error("You must login to save posts")
+            return navigate("/login")
+        }
+
+        const response = await saveRepo({name, description, language, stargazers_count, html_url})
+
+        if (response.status === 403) {
+            toast.error("Invalid or expired token. You must login again")
+            return navigate("/login")
+        }
+
+        const responseJson = await response.json()
+
+        console.log(responseJson)
     }
 
     return (
