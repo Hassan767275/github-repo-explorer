@@ -1,5 +1,4 @@
 import type { UserInfo, repoCard } from "../type";
-import { useNavigate } from "react-router-dom";
 
 export async function getUserRepo(username: string) {
   const data = await fetch(`http://localhost:8000/search?username=${username}`);

@@ -11,4 +11,19 @@ async function createUserTable() {
     )
 }
 
+async function createSavedReposTable() {
+    await pool.query(
+        `CREATE TABLE IF NOT EXISTS SavedRepos (
+            id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+            user_id INT REFERENCES Usertable(id),
+            repo_name TEXT NOT NULL,
+            description TEXT NOT NULL,
+            language TEXT NOT NULL,
+            stargazers_count INT NOT NUll,
+            html_url TEXT NOT NULL
+        )`
+    )
+}
+
 await createUserTable()
+await createSavedReposTable()

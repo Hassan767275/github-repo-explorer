@@ -1,5 +1,6 @@
 import type { Request, Response } from "express"
 
 export function saveRepo(req: Request, res: Response) {
-    console.log(req.body)
+    const { name, description, language, stargazers_count, html_url } = req.body
+    
 }
