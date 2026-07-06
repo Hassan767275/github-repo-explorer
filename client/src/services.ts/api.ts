@@ -33,7 +33,5 @@ export async function sendUserLoginInfo(usernameOrEmail: String, password: Strin
     }),
   });
   
-  const responseJson = await response.json()
-
-  return responseJson
+  return response
 }

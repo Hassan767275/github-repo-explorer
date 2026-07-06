@@ -1,13 +1,24 @@
 import { Link } from "react-router-dom"
 import { sendUserLoginInfo } from "../services.ts/api"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export default function Login() {
+    const naviagte = useNavigate()
+
     async function loginUser(formData: FormData) {
         const usernameOrEmail = formData.get("username") as string
         const password = formData.get("password") as string
 
         const response = await sendUserLoginInfo(usernameOrEmail, password)
-        console.log(response)
+        const responseJson = await response.json()
+        localStorage.setItem('accessToken', responseJson.accessToken)
+
+        if (response.status === 200) {
+            toast.success("Login successfull")
+            naviagte("/")
+        }
+
     }
 
     return (
