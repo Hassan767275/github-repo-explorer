@@ -1,19 +1,34 @@
-import { Link } from "react-router-dom"
-import { useContext } from "react"
-import { authContext } from "./AuthProvider"
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { authContext } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-    const { isLoggedIn, setIsLoggedIn } = useContext(authContext)
+  const { isLoggedIn, setIsLoggedIn } = useContext(authContext);
+  const navigate = useNavigate();
 
-    return (
-        <header className="w-full px-4 py-2 sm:py-4 flex items-center bg-[#161B22]">
-            <h1 className="text-white font-bold w-24 sm:w-full sm:text-xl md:text-2xl">Github Repo Explorer</h1>
-            <div className="flex gap-2 ml-auto">
-                <button className="bg-[#F59E0B] hover:bg-[#FBBF24] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25">Saved</button>
-                <Link to="/login">
-                    <button className="bg-[#7C3AED] hover:bg-[#8B5CF6] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25">{isLoggedIn ? "Sign Out" : "Log In"}</button>
-                </Link>
-            </div>
-        </header>
-    )
+  function signOut() {
+    setIsLoggedIn(false)
+    localStorage.removeItem("accessToken");
+  }
+
+  function login() {
+    navigate("/login");
+  }
+
+  return (
+    <header className="w-full px-4 py-2 sm:py-4 flex items-center bg-[#161B22]">
+      <h1 className="text-white font-bold w-24 sm:w-full sm:text-xl md:text-2xl">
+        Github Repo Explorer
+      </h1>
+      <div className="flex gap-2 ml-auto">
+        <button className="bg-[#F59E0B] hover:bg-[#FBBF24] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25">
+          Saved
+        </button>
+        <button className="bg-[#7C3AED] hover:bg-[#8B5CF6] text-[#ffffff] font-bold px-4 py-1 rounded-lg sm:w-25" onClick={isLoggedIn ? signOut : login}>
+          {isLoggedIn ? "Sign Out" : "Log In"}
+        </button>
+      </div>
+    </header>
+  );
 }
