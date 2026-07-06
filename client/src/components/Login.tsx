@@ -2,9 +2,12 @@ import { Link } from "react-router-dom"
 import { sendUserLoginInfo } from "../services.ts/api"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { useContext } from "react"
+import { authContext } from "./AuthProvider"
 
 export default function Login() {
     const naviagte = useNavigate()
+    const { isLoggedIn, setIsLoggedIn } = useContext(authContext)
 
     async function loginUser(formData: FormData) {
         const usernameOrEmail = formData.get("username") as string
@@ -16,6 +19,7 @@ export default function Login() {
 
         if (response.status === 200) {
             toast.success("Login successfull")
+            setIsLoggedIn(true)
             naviagte("/")
         }
 
