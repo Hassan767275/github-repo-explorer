@@ -2,10 +2,13 @@ import type { repoCard } from "../type"
 import { saveRepo } from "../services.ts/api"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { useState } from "react"
+
 
 export default function RepoCard({name, description, language, stargazers_count, html_url}: repoCard) {
     const accessToken = localStorage.getItem("accessToken")
     const navigate = useNavigate()
+    const [isSaved, setIsSaved] = useState(false)
 
     async function savePost() {
         if (!accessToken) {
@@ -20,9 +23,14 @@ export default function RepoCard({name, description, language, stargazers_count,
             return navigate("/login")
         }
 
-        const responseJson = await response.json()
+        if (response.status === 409) {
+            toast.error("This repo has already been saved")
+        }
 
-        console.log(responseJson)
+        if (response.status === 200) {
+            toast.success("This repo is now saved")
+            setIsSaved(true)
+        }
     }
 
     return (
@@ -33,7 +41,7 @@ export default function RepoCard({name, description, language, stargazers_count,
                 <p className="text-[#7d8590] text-sm">Language: {language}</p>
             </div>
             <div className="text-center flex flex-col items-center gap-2 mb-2 lg:py-4 lg:pr-4">
-                <button className="bg-[#DC2626] hover:bg-[#EF4444] text-[#FFFFFF] px-4 py-1 rounded-lg font-bold" onClick={savePost}>Save</button>
+                <button className={`${isSaved ? "bg-[#16A34A] hover:bg-[#22C55E]" : "bg-[#DC2626] hover:bg-[#EF4444]"} text-[#FFFFFF] px-4 py-1 rounded-lg font-bold`} onClick={savePost}>{isSaved ? "Saved" : "Save"}</button>
                 <p className="text-[#e6edf3] font-medium">⭐ {stargazers_count} {stargazers_count === 1 ? "star" : "stars"}</p>
                 <a className="text-[#58a6ff]" href={html_url} target="_blank">View on Github ↗</a>
             </div>

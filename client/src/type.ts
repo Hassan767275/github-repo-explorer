@@ -32,5 +32,7 @@ export interface UserInfo {
 
 export interface loginContext {
     isLoggedIn: boolean,
-    setIsLoggedIn: (arg0: boolean) => void
+    setIsLoggedIn: (arg0: boolean) => void,
+    isSaved: boolean,
+    setIsSaved: (arg0: boolean) => void
 }
