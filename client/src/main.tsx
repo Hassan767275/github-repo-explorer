@@ -6,6 +6,7 @@ import PageNotFound from './components/PageNotFound.tsx'
 import Login from './components/Login.tsx'
 import Registration from './components/Registration.tsx'
 import { ToastContainer } from 'react-toastify'
+import { AuthProvider } from './components/AuthProvider.tsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App/> },
@@ -14,9 +15,10 @@ const router = createBrowserRouter([
   { path: "*", element: <PageNotFound/> }
 ])
 
+
 createRoot(document.getElementById('root')!).render(
-  <>
-  <ToastContainer />
+  <AuthProvider>
+    <ToastContainer />
     <RouterProvider router={router}/>
-  </>,
+  </AuthProvider>,
 )

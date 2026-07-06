@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className=" flex flex-col items-center">
-      <Header/>
+      <Header />
       <Search searchRepos={searchRepos} error={error} />
       {showRepo && <RepoResults repoCount={repoCount} />}
       {showRepo && repoInfo.map(({id, name, description, language, stargazers_count, html_url}) => (

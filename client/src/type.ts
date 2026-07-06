@@ -29,3 +29,8 @@ export interface UserInfo {
     email: string,
     password: string
 }
+
+export interface loginContext {
+    isLoggedIn: boolean,
+    setIsLoggedIn: (arg0: boolean) => void
+}
