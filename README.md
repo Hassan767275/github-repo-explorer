@@ -48,9 +48,12 @@ cd github-repo-explorer
 Create a `.env` file in `server/`:
 
 ```
-DATABASE_URL=postgresql://user:password@localhost:5432/repo_explorer
-JWT_SECRET=your_secret
-PORT=5000
+DB_USER=postgres
+DB_HOST=localhost
+DB_NAME=repo_explorer
+DB_PASSWORD=your_password
+DB_PORT=5432
+ACCESS_TOKEN_SECRET=your_secret
 ```
 
 Then run the server and client:
